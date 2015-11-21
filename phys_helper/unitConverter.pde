@@ -136,5 +136,10 @@ void onChangeType() {
 
 //convert!
 void convert(float in, int unitsIndex, int fromIndex, int toIndex) {
-  
+  float out;
+  if (fromIndex == toIndex) out = in;
+  else if (unitsIndex == 6) {
+    out = 
+  }
+  ucOutput.setText(in + " " + currUnits[fromIndex] + "\n= " + out + " " + currUnits[toIndex]);
 }
