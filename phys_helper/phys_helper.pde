@@ -10,7 +10,7 @@ Mode mode;
 
 void setup() {
   size(432, 768);
-  mode = Mode.UNITCONV;
+  mode = Mode.MAINMENU;
   cp5 = new ControlP5(this);
 }
 
@@ -26,7 +26,6 @@ void draw() {
       //draw graph UI
       break;
     case UNITCONV:
-      drawUnitConverterUI();
       break;
     case EQCALC:
       //draw calculations UI
