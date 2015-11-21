@@ -5,11 +5,18 @@ public enum Mode {
   MAINMENU, SIMULATION, GRAPH, UNITCONV, EQCALC
 }
 
+PApplet that;
 Mode mode;
+boolean paused;
 
 void setup() {
   size(432, 768);
-  cp5 = new ControlP5(this);
+  
+  that = this;
+  cp5 = new ControlP5(that);
+  
+  paused = false;
+  
   mode = Mode.MAINMENU;
   drawMenu();
 }
@@ -17,19 +24,19 @@ void setup() {
 void draw() {
   switch (mode) {
     case MAINMENU:
-      //draw main menu
+      background(204, 255, 204);
       break;
     case SIMULATION:
-      //draw sim UI
+      background(204, 255, 204);
       break;
     case GRAPH:
-      //draw graph UI
+      background(204, 255, 204);
       break;
     case UNITCONV:
-      //draw converter UI
+      background(204, 255, 204);
       break;
     case EQCALC:
-      //draw calculations UI
+      background(204, 255, 204);
       break;
   }
 }

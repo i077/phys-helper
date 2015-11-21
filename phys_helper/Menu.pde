@@ -5,20 +5,27 @@ public void drawMenu() {
   items.add("Unit Conversion");
   items.add("Equation Calculator");
   
-  cp5.addScrollableList("menuoptions").setType(ScrollableList.LIST).setBarVisible(false)
-    .setPosition(0, 216)
+  cp5.addScrollableList("menuoptions")
+    .setType(ScrollableList.LIST)
+    .setBarVisible(false)
+    .setPosition(0, 385)
     .setSize(width, height - 54)
     .setBarHeight(0)
-    .setItemHeight(100)
-    .setBackgroundColor(0x00cc00)
-    .addItems(items);
+    .setItemHeight(96)
+    .setColor(new CColor(0xff007f00, 0xff009900, 0xff006600, 0xffffffff, 0xfffffff))
+    .addItems(items)
+    .getValueLabel().setSize(25)
+    .alignX(ControlP5.CENTER);
 }
 
 public void menuoptions(int index) {
   cp5.dispose();
+  cp5 = new ControlP5(that);
+  
   switch (index) {
     case 0:
       mode = Mode.SIMULATION;
+      drawSim();
       break;
     case 1:
       mode = Mode.GRAPH;
