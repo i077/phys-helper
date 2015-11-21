@@ -6,20 +6,25 @@ enum ConvertType {
 
 ScrollableList ucType, inUnit, outUnit;
 Textfield ucInput;
-String[] massUnits, lengthUnits, velocityUnits, accelUnits, timeUnits, tempUnits, energyUnits;
+Textarea ucOutput;
+String[] massUnits, lengthUnits, velocityUnits, accelUnits, timeUnits, tempUnits, energyUnits, currUnits;
 
 void setupUnitConverterUI() {
   fill(0);
   setupUCUIRun = true;
   
+  ucOutput = new Textarea(cp5, "Output");
+  ucOutput.setPosition(100, 370)
+          .setText("OUTPUT");
+  
   outUnit = new ScrollableList(cp5, "Convert to...");
   outUnit.setPosition(100, 270)
-          .setSize(232, 200)
-          .setType(ScrollableList.DROPDOWN)
-          .close();
+         .setSize(232, 200)
+         .setType(ScrollableList.DROPDOWN)
+         .close();
   
   //input field
-  Textfield ucInput = new Textfield(cp5, "Input");
+  ucInput = new Textfield(cp5, "Input");
   ucInput.setPosition(100,200)
          .setSize(232,25);
       
@@ -60,45 +65,59 @@ void drawUnitConverterUI() {
   if (!setupUCUIRun) setupUnitConverterUI();
   
   //switch between unit selections when different type is selected
-  if (ControlP5.ACTION_PRESS == 1) onChangeType(); 
+  if (ControlP5.ACTION_PRESS == 1) {
+    onChangeType();
+    convert(float(ucInput.getText()), currUnits[int(inUnit.getValue())], currUnits[int(outUnit.getValue())]);
+  }
+  try {
+    if (keyPressed) convert(float(ucInput.getText()), currUnits[int(inUnit.getValue())], currUnits[int(outUnit.getValue())]);
+  } catch (Exception e) {
+    ucOutput.setText("ERR: INPUT IS NOT A NUMBER");
+  }
 }
 
 void onChangeType() {
   inUnit.clear();
   outUnit.clear();
-  switch ((int)ucType.getValue()) {
-    case 0:
-      inUnit.addItems(massUnits);
-      outUnit.addItems(massUnits);
-      break;
-    case 1:
-      inUnit.addItems(lengthUnits);
-      outUnit.addItems(lengthUnits);
-      break;
-    case 2:
-      inUnit.addItems(velocityUnits);
-      outUnit.addItems(velocityUnits);
-      break;
-    case 3:
-      inUnit.addItems(accelUnits);
-      outUnit.addItems(accelUnits);
-      break;
-    case 4:
-      inUnit.addItems(timeUnits);
-      outUnit.addItems(timeUnits);
-      break;
-    case 5:
-      inUnit.addItems(tempUnits);
-      outUnit.addItems(tempUnits);
-      break;
-    case 6:
-      inUnit.addItems(energyUnits);
-      outUnit.addItems(energyUnits);
-      break;
+  switch (int(ucType.getValue())) {
+    case 0:  inUnit.addItems(massUnits);
+             outUnit.addItems(massUnits);
+             currUnits = massUnits;
+             break;
+             
+    case 1:  inUnit.addItems(lengthUnits);
+             outUnit.addItems(lengthUnits);
+             currUnits = lengthUnits;
+             break;
+             
+    case 2:  inUnit.addItems(velocityUnits);
+             outUnit.addItems(velocityUnits);
+             currUnits = velocityUnits;
+             break;
+             
+    case 3:  inUnit.addItems(accelUnits);
+             outUnit.addItems(accelUnits);
+             currUnits = accelUnits;
+             break;
+             
+    case 4:  inUnit.addItems(timeUnits);
+             outUnit.addItems(timeUnits);
+             currUnits = timeUnits;
+             break;
+             
+    case 5:  inUnit.addItems(tempUnits);
+             outUnit.addItems(tempUnits);
+             currUnits = tempUnits;
+             break;
+             
+    case 6:  inUnit.addItems(energyUnits);
+             outUnit.addItems(energyUnits);
+             currUnits = energyUnits;
+             break;
   }
 }
 
-float convert(float in, String convertFrom, String convertTo) {
+void convert(float in, String convertFrom, String convertTo) {
   float out = in; //temp
-  return out;
+  ucOutput.setText(in + " " + convertFrom + "\n= " + out + " " + convertTo);
 }
