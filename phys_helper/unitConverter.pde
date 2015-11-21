@@ -51,7 +51,7 @@ void setupUnitConverterUI() {
   timeConsts =      new float[]{ 1,             60,              3600,         86400,  604800,       2630000,                 31560000              };
   
   tempUnits =      new String[]{"Degrees Fahrenheit (ºF)", "Degrees Celsius (ºC)", "Kelvin (K)"};
-  tempConsts =      new float[]{ 1,                         0.555555556,            0.555555556};
+  tempConsts =      new float[]{ 1,                         5/9,                    5/9        };
   tempZeros =       new float[]{ 32,                        0,                      373.2      };
   
   energyUnits =    new String[]{"Joules (J)", "Kilojoules (kJ)", "Megajoules (MJ)", "Calories (cal)", "Kilocalories (kcal)", "Megacalories (Mcal)", "Watt-hours (Wh)", "Kilowatt-hours (kWh)"};
@@ -132,14 +132,35 @@ void onChangeType() {
              currConsts = energyConsts;
              break;
   }
+  if (inUnit.getValue() > currUnits.length) {
+    inUnit.setValue(0);
+  }
+  if (outUnit.getValue() > currUnits.length) {
+    outUnit.setValue(0);
+  }
 }
 
 //convert!
 void convert(float in, int unitsIndex, int fromIndex, int toIndex) {
-  float out;
+  float out = in;
   if (fromIndex == toIndex) out = in;
-  else if (unitsIndex == 6) {
-    out = 
+  else if (unitsIndex == 5) {
+    switch (fromIndex) {
+      case 0:  switch(toIndex) {
+                 case 1: out = (in - 32) * (5 / 9);          break;
+                 case 2: out = (in - 32) * (5 / 9) + 273.15; break;
+               }
+      case 1:  switch(toIndex) {
+                 case 0: out = in * (9 / 5) + 32; break;
+                 case 2: out = in + 273.15;       break;
+               }
+      case 2:  switch(toIndex) {
+                 case 0: out = (in - 273.15) * (9 / 5) + 32; break;
+                 case 1: out = in - 273.15;                  break;
+               }
+    } 
+  } else {
+    out = in * currConsts[fromIndex] / currConsts[toIndex];
   }
-  ucOutput.setText(in + " " + currUnits[fromIndex] + "\n= " + out + " " + currUnits[toIndex]);
+  ucOutput.setText(in + " " + currUnits[fromIndex] + "\n\n= " + out + " " + currUnits[toIndex]);
 }
