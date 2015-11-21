@@ -1,14 +1,4 @@
-<<<<<<< HEAD
-void setup(){
-  
-  
-}
 
-void draw(){
-  
-  
-} 
-=======
 import controlP5.*;
 
 ControlP5 cp5;
@@ -42,5 +32,3 @@ void draw() {
       //draw calculations UI
       break;
   }
-}
->>>>>>> master
