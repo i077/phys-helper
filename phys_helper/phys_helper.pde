@@ -1,5 +1,4 @@
 import controlP5.*;
-
 ControlP5 cp5;
 
 public enum Mode {
@@ -10,7 +9,9 @@ Mode mode;
 
 void setup() {
   size(432, 768);
+  cp5 = new ControlP5(this);
   mode = Mode.MAINMENU;
+  drawMenu();
 }
 
 void draw() {
@@ -31,4 +32,8 @@ void draw() {
       //draw calculations UI
       break;
   }
+}
+
+void controlEvent(ControlEvent event) {
+  // use if necessary
 }
