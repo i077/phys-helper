@@ -306,3 +306,7 @@ String newton(String f, String m, String a){
   }
   return "Something is missing.";
 }
+
+String friction(String f, String m, String n){
+  return "Something is missing.";
+}
