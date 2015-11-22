@@ -23,7 +23,7 @@ void draw() {
       //draw sim UI
       break;
     case GRAPH:
-      //draw graph UI
+      drawGraphs();
       break;
     case UNITCONV:
       drawUnitConverterUI();
