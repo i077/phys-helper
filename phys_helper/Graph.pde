@@ -7,7 +7,7 @@ int equation;
 void sets() {
   textSize(12);
   input2 = new Textfield(cp5, "");
-  input3 = new Textfield(cp5, "mass");
+  input3 = new Textfield(cp5, "mass (unfinished)");
   Tlist = new ScrollableList(cp5, "Taskbar"); 
   stuff.add("TaskBar");
   stuff.add("Position vs. Time");
