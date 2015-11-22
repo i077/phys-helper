@@ -29,7 +29,7 @@ void draw() {
       drawUnitConverterUI();
       break;
     case EQCALC:
-      //draw calculations UI
+      equations();
       break;
   }
 }
