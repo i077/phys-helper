@@ -1,6 +1,7 @@
 ScrollableList Tlist;
 Textfield input2;
 Textfield input3;
+boolean runGraphSetup = false;
 ArrayList stuff = new ArrayList();
 //which equation/equation mode
 int equation;
@@ -15,7 +16,19 @@ void sets() {
   stuff.add("Acceleration vs. Time");
   stuff.add("Static Friction vs. Force");
   Tlist.addItems(stuff);
+  runGraphSetup = true;
 }
+
+void drawGraphs() {
+  if (!runGraphSetup) sets();
+  background(255);
+  drawTaskbar();
+  drawGraph();
+  selectOption();
+  drawEquation();
+  setAxis();
+}
+
 void drawTaskbar() {
   fill(0);
   rect(0, height-height/3, width, height/3);
