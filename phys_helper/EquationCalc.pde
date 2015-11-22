@@ -29,11 +29,17 @@ void equations() {
   switch(whichEq) {
 
   case 1:  
+    rectMode(CENTER);
+    fill(255);
+    noStroke();
+    rect(width/2,height/10+65,200,200);
     image(equations.get(0), width/2, height/10);
     image(equations.get(1), width/2, height/10+40);
     image(equations.get(2), width/2, height/10+90);
     image(equations.get(3), width/2, height/10+130);
-
+    
+    fill(0);
+    
     text("Initial v", 40, height/3+30);
     text("Final v", 40, height/3+70);
     text("t", 40, height/3+110);
@@ -47,7 +53,6 @@ void equations() {
     text("m", 175, height/3+190);
 
     text(kinematics(eqvar1.getText(), eqvar2.getText(), eqvar3.getText(), eqvar4.getText(), eqvar5.getText()),width/2+100 ,height/2);
-    //println(kinematics(eqvar1.getText(), eqvar2.getText(), eqvar3.getText(), eqvar4.getText(), eqvar5.getText()));
 
     break;
 
@@ -80,6 +85,8 @@ void equations() {
 
     eqvar4.setText(" NULL");
     eqvar5.setText(" NULL");
+    
+    text(friction(eqvar1.getText(),eqvar2.getText(),eqvar3.getText()),width/2+100,height/2);
 
     break;
 
@@ -98,6 +105,8 @@ void equations() {
 
     eqvar5.setText(" NULL");
 
+    text(gravitation(eqvar1.getText(),eqvar2.getText(),eqvar3.getText(), eqvar4.getText()),width/2+100,height/2);
+
     break;
 
   case 5:  
@@ -114,6 +123,8 @@ void equations() {
     text("m", 175, height/3+150);
 
     eqvar5.setText(" NULL");
+    
+    text("Sorry, this is unfinished",width/2+100,height/2);
 
     break;
 
@@ -131,6 +142,8 @@ void equations() {
     text("m/s", 175, height/3+150);
 
     eqvar5.setText(" NULL");
+    
+    text("Sorry, this is unfinished",width/2+100,height/2);
 
     break;
 
@@ -141,12 +154,14 @@ void equations() {
     text("m", 40, height/3+70);
     text("h", 40, height/3+110);
 
-    text("N", 175, height/3+30);
+    text("J", 175, height/3+30);
     text("kg", 175, height/3+70);
     text("m", 175, height/3+110);
 
     eqvar4.setText(" NULL");
     eqvar5.setText(" NULL");
+
+    text(potential(eqvar1.getText(),eqvar2.getText(),eqvar3.getText()),width/2+100,height/2);
 
     break;
   }
@@ -308,5 +323,82 @@ String newton(String f, String m, String a){
 }
 
 String friction(String f, String m, String n){
+  if(f.equals("")){
+    if(m.equals("")||n.equals("")){
+      return "Something is missing.";
+    }
+    else {
+      return "Friction Force = " + (float(m)*float(n));
+    }
+  }
+  else if (m.equals("")){
+    if(n.equals("")){
+      return "Something is missing";
+    }
+    else {
+      return "Coefficient of Friction = " + (float(f)/float(n));
+    }
+  }
+  else{
+    if(n.equals("")){
+      return "Normal Force = " + (float(f)/float(m));
+    }
+  }
+  return "Something is missing.";
+}
+
+String gravitation(String f, String m1, String m2, String d){
+  float bigG=6.67E-11;
+  if(f.equals("")){
+    if(m1.equals("")||m2.equals("")||d.equals("")){
+      return "Something is missing.";
+    }
+    else{
+      return "Gravitational Force = " + (bigG*float(m1)*float(m2)/float(d)/float(d));
+    }
+  }
+  else if(m1.equals("")){
+    if(m2.equals("")||d.equals("")){
+      return "Something is missing.";
+    }
+    else{
+      return "Mass of first body = " + (float(f)/bigG/float(m2)*float(d)*float(d));
+    }
+  }
+  else if(m2.equals("")){
+    if(d.equals("")){
+      return "Something is missing.";
+    }
+    else{
+      return "Mass of second body = " + (float(f)/bigG/float(m1)*float(d)*float(d));
+    }
+  }
+  else{
+    return "Distance = " + sqrt(abs(float(m1)*float(m2)/float(f)));
+  }
+}
+
+String potential(String p, String m, String h){
+  if(p.equals("")){
+    if(m.equals("")||h.equals("")){
+      return "Something is missing.";
+    }
+    else {
+      return "Potential Energy = " + (float(m)*float(h)*9.8);
+    }
+  }
+  else if (m.equals("")){
+    if(h.equals("")){
+      return "Something is missing";
+    }
+    else {
+      return "Mass = " + (float(p)/float(h)/9.8);
+    }
+  }
+  else{
+    if(h.equals("")){
+      return "Height = " + (float(p)/float(m)/9.8);
+    }
+  }
   return "Something is missing.";
 }

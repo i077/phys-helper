@@ -12,7 +12,7 @@ Mode mode;
 
 void setup() {
   size(432, 768);
-  mode = Mode.EQCALC;
+  mode = Mode.MAINMENU;
   cp5=new ControlP5(this);
 }
 
