@@ -147,17 +147,20 @@ void convert(float in, int unitsIndex, int fromIndex, int toIndex) {
   else if (unitsIndex == 5) {
     switch (fromIndex) {
       case 0:  switch(toIndex) {
-                 case 1: out = (in - 32) * (5 / 9);          break;
-                 case 2: out = (in - 32) * (5 / 9) + 273.15; break;
+                 case 1: out = (in - 32) * (5.0 / 9.0);          break;
+                 case 2: out = (in - 32) * (5.0 / 9.0) + 273.15; break;
                }
+               break;
       case 1:  switch(toIndex) {
-                 case 0: out = in * (9 / 5) + 32; break;
+                 case 0: out = in * (9.0 / 5.0) + 32; break;
                  case 2: out = in + 273.15;       break;
                }
+               break;
       case 2:  switch(toIndex) {
-                 case 0: out = (in - 273.15) * (9 / 5) + 32; break;
+                 case 0: out = (in - 273.15) * (9.0 / 5.0) + 32; break;
                  case 1: out = in - 273.15;                  break;
                }
+               break;
     } 
   } else {
     out = in * currConsts[fromIndex] / currConsts[toIndex];
