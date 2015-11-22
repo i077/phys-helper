@@ -26,6 +26,7 @@ void draw() {
       //draw graph UI
       break;
     case UNITCONV:
+      drawUnitConverterUI();
       break;
     case EQCALC:
       //draw calculations UI
