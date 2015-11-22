@@ -1,16 +1,16 @@
-class Object {
+class Object extends SimObject {
   public PVector position, velocity, dircoords;
   public float radius, mass, momentum, direction, force_in, dir_in;
   
   public Object(float x, float y, float rad) {
-    position.x = x;
-    position.y = y;
+    position = new PVector(x, y);
     radius = max(rad, 25);
     mass = 10; // in kg
     
     velocity = new PVector(0, 0);
     momentum = 0;
     direction = 0; // Always should be in radians
+    dircoords = new PVector(0, 0);
     
     force_in = 0;
     dir_in = 0; // Always should be in radians
@@ -27,13 +27,12 @@ class Object {
   }
   
   public void update(boolean paused) {
-    if (paused) {
-      
-    } else if (force_in != 0) {
+    if (!paused && force_in != 0) {
       momentum += force_in;
+      velocity = PVector.fromAngle(direction).setMag(momentum/mass);
+      force_in = 0;
     }
     
-    velocity = PVector.fromAngle(direction).setMag(momentum/mass);
     position.add(velocity);
   }
 }

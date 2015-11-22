@@ -1,8 +1,19 @@
 public ArrayList<Object> objects;
 public ArrayList<Warp> warps;
 public SimObject selected;
+public boolean paused;
 
 public void drawSim() {
+  addPrimary();
+  
+  objects = new ArrayList<Object>();
+  warps = new ArrayList<Warp>();
+  
+  paused = false;
+  sim_pause();
+}
+
+public void addPrimary() {
   cp5.addButton("sim_to_menu").setCaptionLabel("Menu")
     .setSize(width/2, 25)
     .setPosition(0, height - 25)
@@ -12,16 +23,18 @@ public void drawSim() {
     .setSize(width/2, 25)
     .setPosition(width/2, height - 25)
     .setColor(new CColor(0xff007f00, 0xff009900, 0xff006600, 0xffffffff, 0xfffffff));
-    
-  objects = new ArrayList<Object>();
-  warps = new ArrayList<Warp>();
 }
 
 void mouseClicked() {
   if (mode == Mode.SIMULATION && paused) {
-    for (SimObject i : objects) {
-      if (sq(i.position.x - mouseX) + sq(i.position.y - mouseY) <= sq(i.radius)) {
-        
+    for (Object o : objects) {
+      if (sq(o.position.x - mouseX) + sq(o.position.y - mouseY) <= sq(o.radius)) {
+        selected = o;
+      }
+    }
+    for (Warp w : warps) {
+      if (sq(w.position.x - mouseX) + sq(w.position.y - mouseY) <= sq(w.radius)) {
+        selected = w;
       }
     }
   }
@@ -29,6 +42,7 @@ void mouseClicked() {
 
 public void sim_to_menu() {
   objects = null;
+  warps = null;
   
   cp5.dispose();
   cp5 = new ControlP5(that);
@@ -39,7 +53,6 @@ public void sim_to_menu() {
 
 public void sim_pause() {
   if (paused) {
-    cp5.get(Button.class, "sim_pause").setCaptionLabel("Pause");
     removePauseButtons();
   } else {
     cp5.get(Button.class, "sim_pause").setCaptionLabel("Unpause");
@@ -61,8 +74,9 @@ public void addPauseButtons() {
 }
 
 public void removePauseButtons() {
-  cp5.remove("add_object");
-  cp5.remove("add_warp");
+  cp5.dispose();
+  cp5 = new ControlP5(that);
+  addPrimary();
 }
 
 public void add_object() {

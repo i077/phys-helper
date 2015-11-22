@@ -7,15 +7,12 @@ public enum Mode {
 
 PApplet that;
 Mode mode;
-boolean paused;
 
 void setup() {
   size(432, 768);
   
   that = this;
   cp5 = new ControlP5(that);
-  
-  paused = false;
   
   mode = Mode.MAINMENU;
   drawMenu();
@@ -28,6 +25,14 @@ void draw() {
       break;
     case SIMULATION:
       background(204, 255, 204);
+      for (Object o : objects) {
+        o.update(paused);
+        o.draw(paused);
+      }
+      for (Warp w : warps) {
+        w.update();
+        w.draw();
+      }
       break;
     case GRAPH:
       background(204, 255, 204);
