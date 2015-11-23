@@ -10,11 +10,9 @@ Mode mode;
 
 void setup() {
   size(432, 768);
-  
-  that = this;
-  cp5 = new ControlP5(that);
-  
+  that=this;
   mode = Mode.MAINMENU;
+  cp5 = new ControlP5(that);
   drawMenu();
 }
 
@@ -22,6 +20,7 @@ void draw() {
   switch (mode) {
     case MAINMENU:
       background(204, 255, 204);
+      //draw main menu
       break;
     case SIMULATION:
       background(204, 255, 204);
@@ -42,6 +41,7 @@ void draw() {
       break;
     case EQCALC:
       background(204, 255, 204);
+      drawGraphs();
       break;
   }
 }

@@ -1,6 +1,6 @@
 public void drawMenu() {
   ArrayList<String> items = new ArrayList<String>();
-  items.add("Simulation");
+  items.add("Simulation (unfinished)");
   items.add("Graph");
   items.add("Unit Conversion");
   items.add("Equation Calculator");
@@ -25,7 +25,7 @@ public void menuoptions(int index) {
   switch (index) {
     case 0:
       mode = Mode.SIMULATION;
-      drawSim();
+      //drawSim();
       break;
     case 1:
       mode = Mode.GRAPH;
@@ -37,4 +37,4 @@ public void menuoptions(int index) {
       mode = Mode.EQCALC;
       break;
   }
-}
+} 
