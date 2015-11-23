@@ -29,17 +29,16 @@ void equations() {
   switch(whichEq) {
 
   case 1:  
-    rectMode(CENTER);
     fill(255);
     noStroke();
-    rect(width/2,height/10+65,200,200);
+    rectMode(CENTER);
+    rect(width/2,height/5-10,200,200);
     image(equations.get(0), width/2, height/10);
     image(equations.get(1), width/2, height/10+40);
     image(equations.get(2), width/2, height/10+90);
     image(equations.get(3), width/2, height/10+130);
     
     fill(0);
-    
     text("Initial v", 40, height/3+30);
     text("Final v", 40, height/3+70);
     text("t", 40, height/3+110);
