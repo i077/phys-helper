@@ -39,7 +39,6 @@ void equations() {
     image(equations.get(3), width/2, height/10+130);
     
     fill(0);
-
     text("Initial v", 40, height/3+30);
     text("Final v", 40, height/3+70);
     text("t", 40, height/3+110);
